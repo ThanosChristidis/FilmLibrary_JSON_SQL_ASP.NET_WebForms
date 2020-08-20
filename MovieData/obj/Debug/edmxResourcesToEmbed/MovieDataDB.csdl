@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MovieDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="director">
+    <Key>
+      <PropertyRef Name="director_id" />
+    </Key>
+    <Property Name="director_id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="imdb_link" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="movie" Relationship="Self.moviedirector" FromRole="director" ToRole="movie" />
+  </EntityType>
+  <EntityType Name="movie">
+    <Key>
+      <PropertyRef Name="movie_id" />
+    </Key>
+    <Property Name="movie_id" Type="Int32" Nullable="false" />
+    <Property Name="poster_path" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="original_title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="overview" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="director" Relationship="Self.moviedirector" FromRole="movie" ToRole="director" />
+  </EntityType>
+  <Association Name="moviedirector">
+    <End Role="director" Type="Self.director" Multiplicity="*" />
+    <End Role="movie" Type="Self.movie" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="MovieDataEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="director" EntityType="Self.director" />
+    <EntitySet Name="movie" EntityType="Self.movie" />
+    <AssociationSet Name="moviedirector" Association="Self.moviedirector">
+      <End Role="director" EntitySet="director" />
+      <End Role="movie" EntitySet="movie" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

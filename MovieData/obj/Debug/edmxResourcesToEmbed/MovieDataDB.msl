@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MovieDataModelStoreContainer" CdmEntityContainer="MovieDataEntities">
+    <EntitySetMapping Name="director">
+      <EntityTypeMapping TypeName="MovieDataModel.director">
+        <MappingFragment StoreEntitySet="director">
+          <ScalarProperty Name="director_id" ColumnName="director_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="imdb_link" ColumnName="imdb_link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="movie">
+      <EntityTypeMapping TypeName="MovieDataModel.movie">
+        <MappingFragment StoreEntitySet="movie">
+          <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+          <ScalarProperty Name="poster_path" ColumnName="poster_path" />
+          <ScalarProperty Name="original_title" ColumnName="original_title" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="overview" ColumnName="overview" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="moviedirector" TypeName="MovieDataModel.moviedirector" StoreEntitySet="moviedirector">
+      <EndProperty Name="director">
+        <ScalarProperty Name="director_id" ColumnName="director_id" />
+      </EndProperty>
+      <EndProperty Name="movie">
+        <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

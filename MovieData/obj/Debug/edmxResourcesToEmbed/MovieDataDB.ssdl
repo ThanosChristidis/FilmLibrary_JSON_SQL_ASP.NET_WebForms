@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MovieDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="director">
+    <Key>
+      <PropertyRef Name="director_id" />
+    </Key>
+    <Property Name="director_id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="imdb_link" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="movie">
+    <Key>
+      <PropertyRef Name="movie_id" />
+    </Key>
+    <Property Name="movie_id" Type="int" Nullable="false" />
+    <Property Name="poster_path" Type="varchar" MaxLength="100" />
+    <Property Name="original_title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="overview" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="moviedirector">
+    <Key>
+      <PropertyRef Name="movie_id" />
+      <PropertyRef Name="director_id" />
+    </Key>
+    <Property Name="movie_id" Type="int" Nullable="false" />
+    <Property Name="director_id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_director_id">
+    <End Role="director" Type="Self.director" Multiplicity="1" />
+    <End Role="moviedirector" Type="Self.moviedirector" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="director">
+        <PropertyRef Name="director_id" />
+      </Principal>
+      <Dependent Role="moviedirector">
+        <PropertyRef Name="director_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_movie_id">
+    <End Role="movie" Type="Self.movie" Multiplicity="1" />
+    <End Role="moviedirector" Type="Self.moviedirector" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="movie">
+        <PropertyRef Name="movie_id" />
+      </Principal>
+      <Dependent Role="moviedirector">
+        <PropertyRef Name="movie_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MovieDataModelStoreContainer">
+    <EntitySet Name="director" EntityType="Self.director" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="movie" EntityType="Self.movie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="moviedirector" EntityType="Self.moviedirector" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_director_id" Association="Self.FK_director_id">
+      <End Role="director" EntitySet="director" />
+      <End Role="moviedirector" EntitySet="moviedirector" />
+    </AssociationSet>
+    <AssociationSet Name="FK_movie_id" Association="Self.FK_movie_id">
+      <End Role="movie" EntitySet="movie" />
+      <End Role="moviedirector" EntitySet="moviedirector" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

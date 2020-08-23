@@ -13,6 +13,3 @@ at least the following attributes
 ● List of Directors
 ● The IMDB link to the profile of each of the directors
 
-All the above information will be stored in a relational database. The data in the database will
-be updated each time the process runs.
-

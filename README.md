@@ -1,4 +1,4 @@
-# FilmLibrary_JSON_SQL_ASP.NET_WebForms
+# FilmLibrary_JSON_SQL_ASP.NET_WinForms
 
 Your objective is to build a small project named MovieData. The application will use the API
 from The Movie DB (https://developers.themoviedb.org/3/getting-started), using an
